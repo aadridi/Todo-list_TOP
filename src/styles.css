@@ -4,6 +4,78 @@
 	box-sizing: border-box;
 }
 
+html,
 body {
-	background-color: lightgray;
+	height: 100%;
+}
+
+body {
+	font-family: 'Plus Jakarta Sans', sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* Header */
+header {
+	display: flex;
+	justify-content: space-between;
+	border: 2px solid red;
+	padding: 1rem 2rem;
+}
+
+.logo {
+	display: inline-flex;
+	border: 2px solid green;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
+}
+
+/* Main */
+main {
+	flex: 1;
+	display: grid;
+	grid-template-columns: 1fr 1fr 2fr;
+	padding: 1rem 1rem;
+}
+
+main section {
+	border-right: 2px solid gray;
+	padding: 0rem 1rem;
+}
+
+main section:nth-of-type(3) {
+	border-right: none;
+}
+
+/* Footer */
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 0;
+	font-size: 0.9rem;
+	color: #777;
+	border-top: 2px solid #eaeaea;
+	background-color: #dea54b;
+	color: #3a1772;
+}
+
+footer a {
+	color: inherit;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+footer a:hover {
+	color: #000;
+}
+
+.github-icon {
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
 }
