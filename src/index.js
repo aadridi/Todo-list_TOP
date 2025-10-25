@@ -1,4 +1,5 @@
-import "./styles.css";
-import { greeting } from './greeting.js';
+import './styles.css';
 
-console.log(greeting);
+localStorage.setItem('Test', 'Akrame');
+const testPrenom = localStorage.getItem('Test');
+console.log('Hello ' + testPrenom);
