@@ -1,30 +1,24 @@
-/* todoManager.js
+const todoManager = (() => {
+	const todos = [];
 
-Rôle : orchestrer les interactions entre todos et projects.
+	function addTodo(todo) {
+		todos.push(todo);
+	}
 
-🔸 Contient :
+	function removeTodo(id) {
+		const index = todos.findIndex((todo) => todo.id === id);
+		if (index !== -1) todos.splice(index, 1);
+	}
 
-Les structures principales :
+	function getTodo(id) {
+		return todos.find((todo) => todo.id === id);
+	}
 
-const projects = {};
-const todos = {};
+	function getAllTodos() {
+		return todos;
+	}
 
+	return { addTodo, removeTodo, getTodo, getAllTodos };
+})();
 
-Les fonctions :
-
-createProject(name)
-
-deleteProject(id)
-
-createTodo(title, desc, date, priority, projectId)
-
-deleteTodo(id)
-
-getTodosByProject(projectId)
-
-toggleTodoCompleted(id)
-
-updateTodo(id, updatedFields)
-
-💡 C’est ton chef d’orchestre.
-C’est lui que tu vas manipuler dans la console pour tester ta logique avant de coder l’UI. */
+export default todoManager;

@@ -1,17 +1,24 @@
-/* Rôle : définir ce qu’est une tâche.
-C’est une unité de données et de comportement.
+import { format } from 'date-fns';
 
-🔸 Contient :
+function createTodo(title, description, dueDate, priority, projectId) {
+	return {
+		id: crypto.randomUUID(),
+		title,
+		description,
+		createdDate: format(new Date(), 'dd/MM/yyyy'),
+		dueDate: dueDate ? new Date(dueDate) : null,
+		priority,
+		completed: false,
+		projectId,
 
-Les propriétés : id, title, description, dueDate, priority, completed, projectId
+		toggleCompleted() {
+			this.completed = !this.completed;
+		},
 
-Une factory function ou une classe Todo
+		update(fields) {
+			Object.assign(this, fields);
+		},
+	};
+}
 
-Des méthodes simples comme :
-
-toggleCompleted()
-
-update(fields)
-
-💡 Ce module ne sait rien du reste du système.
-Il ne connaît ni le DOM, ni les projets, ni le TodoManager. */
+export default createTodo;
