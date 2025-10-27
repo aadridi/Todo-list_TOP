@@ -1,15 +1,16 @@
-/* Rôle : représenter un projet (collection logique de tâches).
+import { format } from 'date-fns';
 
-🔸 Contient :
+function createProject(title, description) {
+	return {
+		id: crypto.randomUUID(),
+		title,
+		description: description || 'my project',
+		createdDate: format(new Date(), 'dd/MM/yyyy'),
 
-Les propriétés : id, name, todos (array d’IDs)
+		update(fields) {
+			Object.assign(this, fields);
+		},
+	};
+}
 
-Les méthodes :
-
-addTodoId(todoId)
-
-removeTodoId(todoId)
-
-getTodos()
-
-💡 Ce module ne gère que sa propre liste de todos (sous forme d’IDs). */
+export default createProject;

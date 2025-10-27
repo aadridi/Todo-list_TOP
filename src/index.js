@@ -1,11 +1,12 @@
 import './styles.css';
 import createTodo from "./modules/todo.js";
 import todoManager from './modules/todoManager.js';
+import createProject from './modules/project.js';
 
-const testTodo = createTodo('Apprendre JS', 'Continuer The Odin Project', new Date('2025-12-31'), 'high', '1');
-console.log(testTodo);
-todoManager.addTodo(testTodo);
+const p1 = createProject('The Odin Project', 'Chemin full-stack JS');
+todoManager.addProject(p1);
 
-const testTodo2 = todoManager.getAllTodos();
-console.log(testTodo2);
+console.log(todoManager.getAllProjects());
+
+
 
