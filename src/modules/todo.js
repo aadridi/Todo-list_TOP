@@ -5,7 +5,7 @@ function createTodo(title, description, dueDate, priority, projectId) {
 		id: crypto.randomUUID(),
 		title,
 		description,
-		createdDate: format(new Date(), 'dd/MM/yyyy'),
+		createdDate: new Date(),
 		dueDate: dueDate ? new Date(dueDate) : null,
 		priority,
 		completed: false,
