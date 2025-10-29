@@ -3,6 +3,7 @@ import domHandler from './ui/domHandler.js';
 import todoManager from './modules/todoManager.js';
 import createProject from './modules/project.js';
 import createTodo from './modules/todo.js';
+import { initEventListeners } from './ui/eventListeners';
 
 // --- CRÉATION DE PROJETS ---
 const project1 = createProject('Apprendre JavaScript', "Projet d'apprentissage progressif de JS");
@@ -37,3 +38,5 @@ domHandler.renderProjects(todoManager.getAllProjects());
 
 // --- TEST : afficher les todos d’un projet précis (par exemple le premier) ---
 domHandler.renderTodos(project1.id);
+
+initEventListeners();

@@ -1,38 +1,53 @@
 import createProject from './project.js';
 import createTodo from './todo.js';
-import todoManager from './todoManager.js';
+import storage from '../storage/localStorage.js';
 
 const appController = (() => {
-	const project_work = createProject('Mastering Front-End Development', 'The Odin Project');
-	const project_personal = createProject('Fixing stuff in the house', 'Stuff that needs fixing');
+	let projects = [];
+	let currentProjectId = null;
 
-	const todo_1 = createTodo('Foundations', 'Finish Foundations Chapter', '01/11/2025', 'high', project_work.id);
-	const todo_2 = createTodo('Learning Vanilla JS', 'Start working on ToDo-List app', '30/10/2025', 'medium', project_work.id);
-	const todo_3 = createTodo('Plumber', 'Call plumber to fix WC', '30/10/2025', 'high', project_personal.id);
-	const todo_4 = createTodo('Electricity', "Fix lights in mom's room", '01/11/2025', 'low', project_personal.id);
+	// Charger depuis localStorage
+	const savedData = storage.load();
+	if (savedData) {
+		projects = savedData.projects || [];
+		currentProjectId = savedData.currentProjectId || null;
+	}
 
-	const init = () => {
-		todoManager.addProject(project_work);
-		todoManager.addProject(project_personal);
-		[todo_1, todo_2, todo_3, todo_4].forEach(todoManager.addTodo);
-	};
+	function getProjects() {
+		return projects;
+	}
 
-	const addNewProject = (title, description) => {
+	function getCurrentProject() {
+		return projects.find((p) => p.id === currentProjectId) || projects[0];
+	}
+
+	function addProject(title, description) {
 		const newProject = createProject(title, description);
-		todoManager.addProject(newProject);
-	};
+		projects.push(newProject);
+		currentProjectId = newProject.id;
+		save();
+		return newProject;
+	}
 
-	const addNewTodo = (title, description, dueDate, priority, projectId) => {
-		const newTodo = createTodo(title, description, dueDate, priority, projectId);
-		todoManager.addTodo(newTodo);
-	};
+	function addTodo(title, priority, dueDate, projectId) {
+		const project = projects.find((p) => p.id === projectId);
+		if (!project) return;
+		const newTodo = createTodo(title, priority, dueDate);
+		project.todos.push(newTodo);
+		save();
+	}
 
-	const displaySummary = () => {
-		console.log('Projects:', todoManager.getAllProjects());
-		console.log('Todos:', todoManager.getAllTodos());
-	};
+	function save() {
+		storage.save({ projects, currentProjectId });
+	}
 
-	return { init, addNewProject, addNewTodo, displaySummary };
+	return {
+		getProjects,
+		getCurrentProject,
+		addProject,
+		addTodo,
+		save,
+	};
 })();
 
 export default appController;

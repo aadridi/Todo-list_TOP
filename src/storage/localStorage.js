@@ -1,11 +1,19 @@
-/* localStorage.js
+// modules/storage.js
+const STORAGE_KEY = 'todoAppData';
 
-Rôle : gérer la sauvegarde/restauration automatique de tes données.
+const storage = {
+	save(data) {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+	},
 
-🔸 Contient :
+	load() {
+		const data = localStorage.getItem(STORAGE_KEY);
+		return data ? JSON.parse(data) : null;
+	},
 
-saveData(projects, todos)
+	clear() {
+		localStorage.removeItem(STORAGE_KEY);
+	},
+};
 
-loadData()
-
-💡 Le TodoManager appellera ces fonctions pour garder la persistance des tâches entre les sessions. */
+export default storage;
